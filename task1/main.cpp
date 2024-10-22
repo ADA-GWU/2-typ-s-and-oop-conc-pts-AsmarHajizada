@@ -4,7 +4,7 @@ using namespace std;
 
 class ArrayAllocator {
 public:
-    static const int ARR_SIZE = 100000;   // will be overridden by the user 
+    static const int ARR_SIZE = 2091630;   // approximately maximum size for stack arr in my tests 
 
     // Static array
     void staticArray() {
@@ -14,6 +14,9 @@ public:
     // Stack array 
     void stackArray() {
         int arr[ARR_SIZE];  
+
+        // uncomment this to see the memory usage of stack array
+        // cout << "Stack array memory usage: " << sizeof(arr) / (1024.0 * 1024.0) << "MB" << endl;  
     }
 
     // Heap array 
