@@ -21,9 +21,11 @@ This was the maximum array size that could be used without getting stack overflo
 This time, as expected, the time taken by each array dropped proportionately to the difference between number of calls. Let's do two more comparisons with 1,000,000 and 100,000 calls again but with a 2 times smaller array size of 1,045,815:
 
 1 million calls:
+
 ![1.000.000 calls](task1/images/1m_halfsize.png)
 
 100k calls:
+
 ![100.000 calls](task1/images/100k_halfsize.png)
 
 **The wrap-up of results for a better visual comparison:**
@@ -37,23 +39,18 @@ This time, as expected, the time taken by each array dropped proportionately to 
 
 ### Static Allocation
 
-For all tests, static array showed the fastest results. It was almost two times faster than the second fastest, stack array. There is a simple reason for that difference: memory (static) for this array gets allocated at compile time. Meaning, this memory gets initialized once throughout the entire program run, and only gets reused in loop function calls. The address of the array is in executable itself and it does not change. Static arrays are usually used when:
+For all tests, static array showed the fastest results. It was almost two times faster than the second fastest, stack array. There is a simple reason for that difference: memory (static) for this array gets allocated at compile time. Meaning, this memory gets initialized once throughout the entire program run, and only gets reused in loop function calls. The address of the array is in executable itself and it does not change. 
 
-1. Array size does not ever need to change during runtime;
-2. Performance is a priority (static arrays avoid overhead);
-3. Persistent memory is needed.
+Static arrays are usually used when performance is a top priority, and array size does not ever need to change during runtime. Since array size cannot be changed during runtime, there is less flexibility in using static arrays. Additionally, memory allocated is reserved during the execution of the program, and it will not be deallocated even when the array is not used anymore. 
 
 In the tests, static array allocation time did not grow with array size, but it grew with iteration number. This means difference in array size should not affect the time required by allocation. The increase in time due to iteration (subprogram call times) is only because the array is accessed more times.
 
-Since array size cannot be changed during runtime, there is less flexibility in using static arrays. Additionally, memory allocated is reserved during the execution of the program, and it will not be deallocated even when the array is not used anymore. 
 
 ### Stack Allocation
 
 Stack array allocation was also very fast, but slower than static array. This is because unlike static arrays, in stack, memory gets allocated at runtime. The stack is a **Last-In-First-Out (LIFO)** data type, and allocating memory for stack happens with moving the pointer. The stack also has a fixed size, but it no longer occupies memory after function exits. Stack arrays are usually used when: 
 
-1. Fast memory allocation is needed for temporary arrays in functions;
-2. The array size is limited (stack overflow);
-3. Memory management is a priority (static arrays are deallocated after function returns).
+Stack array should be used when memory management is a priority and the array size is not too large, because it gets deallocated after function returns and it has size limitations. It is a good choice for temporary arrays that are used in a small part of the program.
 
 Like in static, in the tests, static array allocation time only grew with the number of calls to the program. This is because the time to allocate memory is independent of the array size. No matter how large or small an array is (as long as it does not exceed memory limitations), only stack pointer is adjusted on each call.
 
@@ -69,11 +66,16 @@ cout << "Stack array memory usage: " << sizeof(arr) / (1024.0 * 1024.0) << "MB" 
 ```
 
 Printed result:
+
 ![alt text](task1/images/stack_memory.png)
 
 ### Heap Allocation
 
-# TODO: Complete heap allocation and wrap-up
+Heap allocation was the slowest in all test cases. In heap allocation, memory gets allocated dynamically during runtime. This additionally allocated memory stays allocated until it is deallocated in the code (```delete[]```). So, heap allocation is the slowest among three due to overhead in dynamic memory management 
+
+Heap array is used when the final array size is not known at the start of the program and it can change during execution. Additionally, heap has access to larger memory, so its array size is much less limited compared to stack. Unlike stack, the allocated memory for heap arrays stay allocated after function returns if it is not manually removed, so heap array is also the more optimal choice when we need the array to be present outside the function.
+
+Unlike static and stack array, heap array allocation time got affected by the increase in array size as well. It is probably also because of dynamic memory management, as heap searches for a large enough free block of memory for the specific allocation. From assignment 1 task 2, we learned that dynamic arrays usually allocate more memory when it is needed at start, and allocates more when the limit is reached each time, so, this should also affect the execution time.
 
 ## Final Comparison and Wrap-up
 
@@ -82,3 +84,5 @@ Printed result:
 | Static     | Fast              | Fixed at compile time  | Automatic                  | Fast access to fixed-size arrays       |
 | Stack      | Fast              | Limited by stack size  | Automatic (LIFO)           | Temporary, fast-access memory          |
 | Heap       | Slow              | Limited by system RAM  | Manual (must be freed)     | Large or dynamically sized arrays      |
+
+To conclude, static arrays and stack arrays are fast, but better to use when the array size is not too big. Their allocation time does not get affected by array size. In contrast, heap array allocation is slower, but it allows the usage of larger and growing arrays. Its allocation time get longer as the array size grows.
