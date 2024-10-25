@@ -55,6 +55,7 @@ Stack array should be used when memory management is a priority and the array si
 Like in static, in the tests, static array allocation time only grew with the number of calls to the program. This is because the time to allocate memory is independent of the array size. No matter how large or small an array is (as long as it does not exceed memory limitations), only stack pointer is adjusted on each call.
 
 **Opinions on stack overlow**
+
 After testing, maximum array size without getting stack overflow was about 2091630. For example, for an array size of 2100000, this was the result:
 
 ![alt text](task1/images/stack_overflow.png)
