@@ -8,10 +8,7 @@ class LibraryItem
   # attr_reader
   # attr_writer
 
-  # don't forget public and private
   # accessing protected methods from subclass is allowed
-  # accessing private methods from subclass is not allowed (but works somehow???)
-
 
   attr_reader :title, :creator, :pub_year
 

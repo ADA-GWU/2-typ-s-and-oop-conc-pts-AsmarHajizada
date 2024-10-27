@@ -87,3 +87,23 @@ Unlike static and stack array, heap array allocation time got affected by the in
 | Heap       | Slow              | Limited by system RAM  | Manual (must be freed)     | Large or dynamically sized arrays      |
 
 To conclude, static arrays and stack arrays are fast, but better to use when the array size is not too big. Their allocation time does not get affected by array size. In contrast, heap array allocation is slower, but it allows the usage of larger and growing arrays. Its allocation time get longer as the array size grows.
+
+
+## Task 2
+### Task definition
+The goal of this task to write a C# program that uses ***dynamic*** and ***static*** binding in OOP. Another requirement is to demonstrate the use of *new*, *virtual*, and *override* keywords.
+
+### Structure in task2
+ * [Devices/](task2/Devices/)
+   * [GamingDevice.cs](task2/Devices/GamingDevice.cs)
+   * [Nintendo.cs](task2/Devices/Nintendo.cs)
+   * [PC.cs](task2/Devices/PC.cs)
+   * [PlayStation.cs](task2/Devices/PlayStation.cs)
+ * [Program.cs](task2/Program.cs)
+ * [task2.csproj](task2/task2.csproj)
+
+### How to run
+To run this program:
+
+1. Navigate to [Task 2](task2)
+2. Type and run ```dotnet run```
