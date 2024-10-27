@@ -10,7 +10,7 @@ public class Nintendo : GamingDevice
     }
 
     // method hiding, static binding
-    public new void ConnectToInternet()
+    public void ConnectToInternet()
     {
         Console.WriteLine("Connecting to the internet via Nintendo's network.");
     }

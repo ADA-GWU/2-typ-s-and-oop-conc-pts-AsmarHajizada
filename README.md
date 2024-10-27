@@ -94,13 +94,32 @@ To conclude, static arrays and stack arrays are fast, but better to use when the
 The goal of this task to write a C# program that uses ***dynamic*** and ***static*** binding in OOP. Another requirement is to demonstrate the use of *new*, *virtual*, and *override* keywords.
 
 ### Structure in task2
- * [Devices/](task2/Devices/)
-   * [GamingDevice.cs](task2/Devices/GamingDevice.cs)
-   * [Nintendo.cs](task2/Devices/Nintendo.cs)
-   * [PC.cs](task2/Devices/PC.cs)
-   * [PlayStation.cs](task2/Devices/PlayStation.cs)
- * [Program.cs](task2/Program.cs)
- * [task2.csproj](task2/task2.csproj)
+├── Devices
+│   ├── GamingDevice.cs
+│   ├── Nintendo.cs
+│   ├── PC.cs
+│   └── PlayStation.cs
+├── Program.cs
+└── task2.csproj
+
+### Static binding and Dynamic binding
+***Static binding*** is when the method calls are resolved at compile time. Meaning, it will not be affected by polymorphism during the runtime. With static binding, when you create a reference to a base class object and assign it to derived class, for ex. ```baseClass ptr = new derivedClass()```, still the base class original method will be called even if derived class has also declared its own method with the same name. This is because the method is bound to base class in the compile time. Non-virtual methods (the ones not declared with *virtual* keyword) are static methods.
+
+The *new* keyword in derived class methods shows that the derived class method hides base class method. It is useful when you create a direct reference to derived class itself, for ex. ```derivedClass ptr = new derivedClass()```. Then when you run call its methods, derived class methods are called via static binding and hiding. In this solution, we get a warning like this when deleting the new keyword in derived class redeclaration:
+
+![alt text](images/hiding_warning.png)
+
+***Dyanmic binding*** is when the method calls are resolved at runtime. For it to happen, the method should be defined in base class using *virtual* keyword. Unlike static binding, invoked method does not depend on reference type, instead it depends on object type during runtime. With this, even if you declare the derived class via base class pointer like ```baseClass ptr = new derivedClass```, the last defined method will be called (even when you call the method from child of a child). In C#, when a method that exists in the base class is defined in child class as well (Polymorphism), *override* keyword is used to show that base class method is overridden.
+
+### Solution explanation
+For solution, first GamingDevice base class was declared, then derived classes Nintendo, PC, and Playstation. Base class has one virtual method and two non-virtual methods for comparison. Similarly, derived classes each has one method with *override* keyword that demonstrated virtual binding, and two static binding methods. The code is tested by using two types of declarations: 
+
+1. Child class Pointer
+2. Base class Pointer
+
+Here is the result that demonstrates both outputs:
+
+![alt text](images/task2_output.png)
 
 ### How to run
 To run this program:
