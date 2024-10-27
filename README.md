@@ -12,21 +12,21 @@ Each of the three array allocation methods was called many times in a loop, and 
 ## Explanation of results
 Results of 1,000,000 calls for each subprogram for an array size of 2,091,630: 
 
-![alt text](task1/images/1m_full.png)
+![alt text](images/1m_full.png)
 
 This was the maximum array size that could be used without getting stack overflow (further explanation below). It is obvious that heap array allocation is much more time complex compared to the other two. To get a better understanding, here is the result with the same array size and 100,000 (10 times less than previous example) calls:
 
-![alt text](task1/images/100k_full.png)
+![alt text](images/100k_full.png)
 
 This time, as expected, the time taken by each array dropped proportionately to the difference between number of calls. Let's do two more comparisons with 1,000,000 and 100,000 calls again but with a 2 times smaller array size of 1,045,815:
 
 1 million calls:
 
-![1.000.000 calls](task1/images/1m_halfsize.png)
+![1.000.000 calls](images/1m_halfsize.png)
 
 100k calls:
 
-![100.000 calls](task1/images/100k_halfsize.png)
+![100.000 calls](images/100k_halfsize.png)
 
 **The wrap-up of results for a better visual comparison:**
 | Array Size | Iterations  | Static Array (time in ms) | Stack Array (time in ms) | Heap Array (time in ms) |
@@ -58,7 +58,7 @@ Like in static, in the tests, static array allocation time only grew with the nu
 
 After testing, maximum array size without getting stack overflow was about 2091630. For example, for an array size of 2100000, this was the result:
 
-![alt text](task1/images/stack_overflow.png)
+![alt text](images/stack_overflow.png)
 
 Notice the times subprogram was run is only 1. Stack overflow happening depends on declared array size and not on how many times it was declared. Turns out maximum available memory for stack allocation is 8 MB on this machine. This was verified by printing the result using this line of code: 
 
@@ -68,7 +68,7 @@ cout << "Stack array memory usage: " << sizeof(arr) / (1024.0 * 1024.0) << "MB" 
 
 Printed result:
 
-![alt text](task1/images/stack_memory.png)
+![alt text](images/stack_memory.png)
 
 ### Heap Allocation
 
@@ -95,11 +95,17 @@ The goal of this task to write a C# program that uses ***dynamic*** and ***stati
 
 ### Structure in task2
 ├── Devices
+
 │   ├── GamingDevice.cs
+
 │   ├── Nintendo.cs
+
 │   ├── PC.cs
+
 │   └── PlayStation.cs
+
 ├── Program.cs
+
 └── task2.csproj
 
 ### Static binding and Dynamic binding
