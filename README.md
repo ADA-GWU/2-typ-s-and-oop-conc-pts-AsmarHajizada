@@ -137,46 +137,46 @@ The main objective was to create a **LibraryItem** class in Ruby with three chil
 ### Classes and Methods
 #### 1. LibraryItem (base class)
 
-    - **Attributes**: title, creator, pub_year, genre(optional), rating(optional)
-    - **Methods**:
-        - *initialize*: sets up common attributes.
-	    - *display_info*: displays the basic information that all library items have in common.
+ - **Attributes**: title, creator, pub_year, genre(optional), rating(optional)
+ - **Methods**:
+    - *initialize*: sets up common attributes.
+    - *display_info*: displays the basic information that all library items have in common.
 
 #### 2. Book (inherits from LibraryItem)
 
-	- **Additional Attributes**: num_pages
-	- **Additional Methods**:
-	    - *long_book?*: returns true if the book has more than predefined (500) number of pages.
-	    - *display_info*: displays information specific to books (number of pages). Creator from the base class is labeled as Author here.
+ - **Additional Attributes**: num_pages
+ - **Additional Methods**:
+    - *long_book?*: returns true if the book has more than predefined (500) number of pages.
+    - *display_info*: displays information specific to books (number of pages). Creator from the base class is labeled as Author here.
 
 #### 3. DVD (inherits from LibraryItem)
 
-	- **Additional Attributes**: duration, age_restriction
-	- **Additional Methods**:
-	    - *long_movie?*: returns true if the DVD is longer than given (120 minutes) amount of time.
-	    - *display_info*: displays information specific to DVDs - duration and recommended viewing age. Creator from the base class is labeled as Director here.
+ - **Additional Attributes**: duration, age_restriction
+ - **Additional Methods**:
+    - *long_movie?*: returns true if the DVD is longer than given (120 minutes) amount of time.
+    - *display_info*: displays information specific to DVDs - duration and recommended viewing age. Creator from the base class is labeled as Director here.
 
 #### 4. CD (inherits from LibraryItem)
 
-	- **Additional Attributes**: num_tracks, duration
-	- **Additional Methods**:
-	    - *long_album?*: returns true if the total duration of the album is longer than given amount of time (60 minutes).
-	    - *display_info*: displays information specific to CDs - number of tracks and total duration. Creator from the base class is labeled as Artist here.
+ - **Additional Attributes**: num_tracks, duration
+ - **Additional Methods**:
+    - *long_album?*: returns true if the total duration of the album is longer than given amount of time (60 minutes).
+    - *display_info*: displays information specific to CDs - number of tracks and total duration. Creator from the base class is labeled as Artist here.
 
 #### 5. Library
 
-	- **Attributes**: items (an array that holds all library items)
-	- **Methods**:
-	    - *add_item*
-	    - *remove_item*
-	    - *display_all_items*: displays all items via each item’s display_info method.
-	    - *display_catalog*: similar to display_info, but provides a shorter information with just name, creator, and year.
+ - **Attributes**: items (an array that holds all library items)
+ - **Methods**:
+    - *add_item*
+    - *remove_item*
+    - *display_all_items*: displays all items via each item’s display_info method.
+    - *display_catalog*: similar to display_info, but provides a shorter information with just name, creator, and year.
 
 ### Additional Notes
 
-According to [Ruby Style Guide](https://rubystyle.guide/#crlf), name of the methods that return a boolean value should end with ? (question mark) That is why some method names end with question mark. From personal point of view, question mark sometimes decreases readability, but in this case, it helps understand the purpose of the method more quickly.
+1. According to [Ruby Style Guide](https://rubystyle.guide/#crlf), name of the methods that return a boolean value should end with ? (question mark) That is why some method names end with question mark. From personal point of view, question mark sometimes decreases readability, but in this case, it helps understand the purpose of the method more quickly.
 
-Keyword arguments work differently from Python. In Python, with optional arguments, if we provide the keyword, order did not matter. However, the same code in Ruby just assigns the value to the argument that is in order even if we specify the keyword. For example:
+2. Keyword arguments work differently from Python. In Python, with optional arguments, if we provide the keyword, order did not matter. However, the same code in Ruby just assigns the value to the argument that is in order even if we specify the keyword. For example:
 
 DVD initialize method starts with this line:
 
@@ -197,6 +197,7 @@ For it to assign everything correctly, every argument must be written in correct
 dvd = DVD.new("Incеption", "Christophеr Nolan", 2010, 120, "Sciеncе Fiction", rating=nil, age_restriction=13)
 ```
 
+3. It is cool that when we call ```display_info``` of each item via Library class, it first calls the display info of the base class, then calls the display info of the child class and kind of attaches them together. This is possible because ***super*** keyword is written in each child class' ```display_info``` method. When we do not write ***super*** keyword, child class' method overrides the base class method.
 
 ### How to run
 
