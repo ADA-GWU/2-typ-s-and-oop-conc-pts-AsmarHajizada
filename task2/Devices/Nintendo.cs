@@ -1,6 +1,5 @@
 using System;
 
-// derived class Nintendo with overriding and method hiding
 public class Nintendo : GamingDevice
 {
     // override keyword to enable overriding here

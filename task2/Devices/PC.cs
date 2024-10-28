@@ -1,6 +1,5 @@
 using System;
 
-// derived class PC with overriding and method hiding
 public class PC : GamingDevice
 {
     // override keyword to enable overriding here
