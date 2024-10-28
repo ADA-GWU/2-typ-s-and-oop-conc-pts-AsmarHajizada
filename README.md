@@ -96,17 +96,11 @@ The goal of this task to write a C# program that uses ***dynamic*** and ***stati
 ### Structure in task2
 ```
 ├── Devices
-
 │   ├── GamingDevice.cs
-
 │   ├── Nintendo.cs
-
 │   ├── PC.cs
-
 │   └── PlayStation.cs
-
 ├── Program.cs
-
 └── task2.csproj
 ```
 
@@ -117,7 +111,7 @@ The *new* keyword in derived class methods shows that the derived class method h
 
 ![alt text](images/hiding_warning.png)
 
-***Dyanmic binding*** is when the method calls are resolved at runtime. For it to happen, the method should be defined in base class using *virtual* keyword. Unlike static binding, invoked method does not depend on reference type, instead it depends on object type during runtime. With this, even if you declare the derived class via base class pointer like ```baseClass ptr = new derivedClass```, the last defined method will be called (even when you call the method from child of a child). In C#, when a method that exists in the base class is defined in child class as well (Polymorphism), *override* keyword is used to show that base class method is overridden.
+***Dynamic binding*** is when the method calls are resolved at runtime. For it to happen, the method should be defined in base class using *virtual* keyword. Unlike static binding, invoked method does not depend on reference type, instead it depends on object type during runtime. With this, even if you declare the derived class via base class pointer like ```baseClass ptr = new derivedClass```, the last defined method will be called (even when you call the method from child of a child). In C#, when a method that exists in the base class is defined in child class as well (Polymorphism), *override* keyword is used to show that base class method is overridden.
 
 ### Solution explanation
 For solution, first GamingDevice base class was declared, then derived classes Nintendo, PC, and Playstation. Base class has one virtual method and two non-virtual methods for comparison. Similarly, derived classes each has one method with *override* keyword that demonstrated virtual binding, and two static binding methods. The code is tested by using two types of declarations: 
@@ -133,8 +127,84 @@ Here is the result that demonstrates both outputs:
 To run this program:
 
 1. Navigate to [Task 2](task2)
-2. Type and run ```dotnet run```
+2. Type and run ```dotnet run``` in the command line.
 
 
 ## Task 3
 ### Task definition
+The main objective was to create a **LibraryItem** class in Ruby with three child classes: **Book**, **DVD**, **CD**, and a **Library** class to add items to the library, remove items from the library, and display item information. Each item has common properties like title, creator, and publication year, and unique items. To start writing the solution, the main source for syntax was [Ruby Style Guide](https://rubystyle.guide/#crlf).
+
+### Classes and Methods
+#### 1. LibraryItem (base class)
+
+    - **Attributes**: title, creator, pub_year, genre(optional), rating(optional)
+    - **Methods**:
+        - *initialize*: sets up common attributes.
+	    - *display_info*: displays the basic information that all library items have in common.
+
+#### 2. Book (inherits from LibraryItem)
+
+	- **Additional Attributes**: num_pages
+	- **Additional Methods**:
+	    - *long_book?*: returns true if the book has more than predefined (500) number of pages.
+	    - *display_info*: displays information specific to books (number of pages). Creator from the base class is labeled as Author here.
+
+#### 3. DVD (inherits from LibraryItem)
+
+	- **Additional Attributes**: duration, age_restriction
+	- **Additional Methods**:
+	    - *long_movie?*: returns true if the DVD is longer than given (120 minutes) amount of time.
+	    - *display_info*: displays information specific to DVDs - duration and recommended viewing age. Creator from the base class is labeled as Director here.
+
+#### 4. CD (inherits from LibraryItem)
+
+	- **Additional Attributes**: num_tracks, duration
+	- **Additional Methods**:
+	    - *long_album?*: returns true if the total duration of the album is longer than given amount of time (60 minutes).
+	    - *display_info*: displays information specific to CDs - number of tracks and total duration. Creator from the base class is labeled as Artist here.
+
+#### 5. Library
+
+	- **Attributes**: items (an array that holds all library items)
+	- **Methods**:
+	    - *add_item*
+	    - *remove_item*
+	    - *display_all_items*: displays all items via each item’s display_info method.
+	    - *display_catalog*: similar to display_info, but provides a shorter information with just name, creator, and year.
+
+### Additional Notes
+
+According to [Ruby Style Guide](https://rubystyle.guide/#crlf), name of the methods that return a boolean value should end with ? (question mark) That is why some method names end with question mark. From personal point of view, question mark sometimes decreases readability, but in this case, it helps understand the purpose of the method more quickly.
+
+Keyword arguments work differently from Python. In Python, with optional arguments, if we provide the keyword, order did not matter. However, the same code in Ruby just assigns the value to the argument that is in order even if we specify the keyword. For example:
+
+DVD initialize method starts with this line:
+
+```Ruby
+def initialize(title, director, pub_year, duration, genre=nil, rating=nil, age_restriction=nil)
+```
+
+in [main.rb](task3/main.rb), when the DVD item is created like this:
+```Ruby
+dvd = DVD.new("Incеption", "Christophеr Nolan", 2010, 120, "Sciеncе Fiction", age_restriction=13)
+```
+
+Ruby thinks 13 belongs to rating:
+![alt text](images/task3_ruby_keyword.png)
+
+For it to assign everything correctly, every argument must be written in correct order, even if they are optional arguments:
+```Ruby
+dvd = DVD.new("Incеption", "Christophеr Nolan", 2010, 120, "Sciеncе Fiction", rating=nil, age_restriction=13)
+```
+
+
+### How to run
+
+To run this program: 
+
+1. Navigate to [Task 3](task3)
+2. Type and run ```ruby main.rb``` in the command line.
+
+The output should look like this:
+
+![alt text](images/task3_output.png)
