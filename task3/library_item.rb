@@ -1,8 +1,5 @@
 class LibraryItem
 
-  # getter and setter methods needed to access (extend)
-  # accessing protected methods from subclass is allowed
-
   attr_reader :title, :creator, :pub_year
   attr_accessor :genre, :rating
 
