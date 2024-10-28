@@ -94,6 +94,7 @@ To conclude, static arrays and stack arrays are fast, but better to use when the
 The goal of this task to write a C# program that uses ***dynamic*** and ***static*** binding in OOP. Another requirement is to demonstrate the use of *new*, *virtual*, and *override* keywords.
 
 ### Structure in task2
+```
 ├── Devices
 
 │   ├── GamingDevice.cs
@@ -107,6 +108,7 @@ The goal of this task to write a C# program that uses ***dynamic*** and ***stati
 ├── Program.cs
 
 └── task2.csproj
+```
 
 ### Static binding and Dynamic binding
 ***Static binding*** is when the method calls are resolved at compile time. Meaning, it will not be affected by polymorphism during the runtime. With static binding, when you create a reference to a base class object and assign it to derived class, for ex. ```baseClass ptr = new derivedClass()```, still the base class original method will be called even if derived class has also declared its own method with the same name. This is because the method is bound to base class in the compile time. Non-virtual methods (the ones not declared with *virtual* keyword) are static methods.
@@ -132,3 +134,7 @@ To run this program:
 
 1. Navigate to [Task 2](task2)
 2. Type and run ```dotnet run```
+
+
+## Task 3
+### Task definition
